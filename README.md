@@ -85,6 +85,8 @@ Pros:
 // index.js
 
 const {spy, assert} = require("sinon");
+const database = require("./src/db");
+const store = require("./src/store")(database);
 
 it("basic spy", () => {
     // Spy on a variable
@@ -98,6 +100,40 @@ it("basic spy", () => {
     assert.calledWith(callback, [harry, john]);
 });
 ```
+
+### Mocks
+
+Use mocks to stub out whole objects.
+
+```js
+// index.js
+
+const {mock, assert} = require("sinon");
+const database = require("./src/db");
+const store = require("./src/store")(database);
+
+it("mocks", () => {
+    // Mock our whole database object
+    var db = mock(store.database);
+
+    // Setup our mock to replace functionality,
+    // if all we care about is that these methods
+    // were called once, we replace them with checks.
+    db.expects("setUsers").once();
+
+    // This needs to return something to continue with the method
+    // so we stub out the return value of `getUsers()`
+    db.expects("getUsers").once().returns([]);
+
+    store.addUser(harry, () => {});
+
+    // Verify that the mocked expects happened
+    // setUsers() was called once
+    // getUsers() was called once
+    db.verify();
+});
+```
+
 
 ### Further Reading
 

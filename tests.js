@@ -4,6 +4,7 @@ const {
     assert,
     spy,
     stub,
+    mock,
     createSandbox
 } = require("sinon");
 
@@ -160,4 +161,31 @@ it("check that our sandpit works", () => {
     // instead of using our mocks because they are removed
     store.addUser(harry, () => {});
     assert.match(store.database.getUsers().length, 1);
+});
+
+
+/**
+ * Mocks:
+ *
+ * Use mocks to stub out whole objects.
+ */
+it("mocks", () => {
+    // Mock our whole database object
+    var db = mock(store.database);
+
+    // Setup our mock to replace functionality,
+    // if all we care about is that these methods
+    // were called once, we replace them with checks.
+    db.expects("setUsers").once();
+
+    // This needs to return something to continue with the method
+    // so we stub out the return value of `getUsers()`
+    db.expects("getUsers").once().returns([]);
+
+    store.addUser(harry, () => {});
+
+    // Verify that the mocked expects happened
+    // setUsers() was called once
+    // getUsers() was called once
+    db.verify();
 });
