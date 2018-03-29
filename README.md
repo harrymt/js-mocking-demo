@@ -21,7 +21,21 @@ To have the `describe("...")` and `it("...")`:
 $ npm i -D mocha
 ```
 
-### First test
+### Basic In-memory storage
+
+Run basic program.
+
+```
+$ npm start
+```
+
+Run tests.
+
+```
+$ npm test
+```
+
+### Overview
 
 ```js
 // index.js
