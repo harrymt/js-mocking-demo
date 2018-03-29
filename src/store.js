@@ -16,7 +16,7 @@ module.exports = database => {
                 throw new Error("Cannot add user, input user is invalid.");
             }
             const newUsers = [...database.getUsers(), user];
-            return database.setUsers(newUsers, callback);
+            database.setUsers(newUsers, callback);
         },
 
         /**
@@ -31,7 +31,7 @@ module.exports = database => {
                 throw new Error("Cannot remove user, input id is invalid.");
             }
             const newUsers = database.getUsers().filter(user => user.id !== id);
-            return database.setUsers(newUsers, callback);
+            database.setUsers(newUsers, callback);
         }
     }
 };
