@@ -1,12 +1,19 @@
 "use strict";
 
-const {assert, spy, stub, createSandbox} = require("sinon");
+const {
+    assert,
+    spy,
+    stub,
+    createSandbox
+} = require("sinon");
 
+const database = require("./src/db");
+const store = require("./src/store")(database);
+
+// Sample user data
 const harry = {id: 0, name: "Harry"};
 const john =  {id: 1, name: "John"};
 
-const stubbedDatabase = require("./db");
-let store = require("./store")(stubbedDatabase);
 
 it("basic stub", () => {
     const getUsersStub = stub(stubbedDatabase, "getUsers");

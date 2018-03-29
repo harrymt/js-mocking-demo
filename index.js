@@ -1,9 +1,9 @@
 
-const db = require("./db");
+const db = require("./src/db");
 
 
 const start = () => {
-    const store = require("./store")(db);
+    const store = require("./src/store")(db);
     const harry = {id: 0, name: "Harry"};
     const john =  {id: 1, name: "John"};
     store.addUser(harry, users => console.log("After adding", users));
