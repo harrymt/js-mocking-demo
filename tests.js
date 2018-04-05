@@ -189,3 +189,14 @@ it("mocks", () => {
     // getUsers() was called once
     db.verify();
 });
+
+
+/**
+ * WithArgs
+ */
+ it.only("with args comparison", () => {
+    const fn = stub();
+    fn.withArgs({id: 1}).returns({name: "harry"});
+    const result = fn({id: 1});
+    assert.match("harry", result.name);
+ });
