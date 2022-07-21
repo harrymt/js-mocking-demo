@@ -159,8 +159,9 @@ describe("sandpit", () => {
 it("check that our sandpit works", () => {
     // This will perform database tasks,
     // instead of using our mocks because they are removed
+    const initialSize = store.database.getUsers().length;
     store.addUser(harry, () => {});
-    assert.match(store.database.getUsers().length, 1);
+    assert.match(store.database.getUsers().length, initialsize + 1);
 });
 
 
